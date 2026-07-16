@@ -97,16 +97,10 @@ router.post('/post-one-user', postUsers)
 
 /**
  * @swagger
- * /edit-one-user/{userID}:
+ * /edit-one-user:
  *   put:
  *     summary: edit User info
  *     description: edit User info by user id
- *     parameters:
- *       - in: path
- *         name: userID
- *         required: true
- *         schema:
- *           type: integer
  *     requestBody:
  *       required: true
  *       content:
@@ -119,7 +113,7 @@ router.post('/post-one-user', postUsers)
  *       404:
  *         description: user id not found 
  */
-router.put('/edit-one-user/:userID', autoMiddleware, authorizeRoles('customer','admin', 'seller'), updateUsers)
+router.put('/edit-one-user', autoMiddleware, authorizeRoles('customer','admin', 'seller'), updateUsers)
 
 /**
  * @swagger

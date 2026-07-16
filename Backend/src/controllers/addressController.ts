@@ -11,7 +11,7 @@ const getAddress = async (req:Request, res:Response, next:NextFunction)=>{
             data.push(rows)
 
             if(data[0].length === 0){
-                res.status(404).send("userID Not Found")
+                res.status(200).send({message:"userID Not Found"})
             }else{
                 res.status(200).send(data)
             }
@@ -22,7 +22,7 @@ const getAddress = async (req:Request, res:Response, next:NextFunction)=>{
             data.push(rows)
 
             if(data.length === 0){
-                res.status(404).send("Address data Not Found")
+                res.status(200).send({message:"Address data Not Found"})
             }else{
                 res.status(200).send(data)
             }

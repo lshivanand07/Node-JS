@@ -13,7 +13,7 @@ const getUsers = async (req:Request, res:Response, next:NextFunction)=>{
       data.push(rows)
 
       if(data[0].length === 0){
-        res.status(404).send("userID is Not Found")
+        res.status(200).send({message:"userID is Not Found"})
       }else{
           res.status(200).send(data)
       }
@@ -24,7 +24,7 @@ const getUsers = async (req:Request, res:Response, next:NextFunction)=>{
       data.push(rows)
 
       if(data.length === 0){
-        res.status(404).send("Data is Not Found")
+        res.status(200).send({message:"Data is Not Found"})
       }else{
           res.status(200).send(data)
       }
@@ -61,9 +61,8 @@ const postUsers = async (req:Request, res:Response, next:NextFunction)=>{
     try {
          const userData = req.body
 
-           if(!userData.user_id  || !userData.user_name || !userData.password){
-            res.status(400).send("id, name, password required")
-            console.log("id, Name and password required")
+           if(!userData.user_name || !userData.password){
+            res.status(200).send({message: "name, password required"})
         }else{
             const result = await insertOneUser(userData)
             res.status(201).send({message: "User data has been successfully inserted.",
@@ -79,14 +78,16 @@ const postUsers = async (req:Request, res:Response, next:NextFunction)=>{
 const updateUsers = async (req:Request, res:Response, next:NextFunction)=>{
 
     try{
-    const userID = Number(req.params.userID)
+    const userID = (req as any).user.user_id
     const userData = req.body;
-
+     
     const result = await updateOneUser(userID, userData)
+    console.log("backend",userData, userID, result)
+
     if(result.affectedRows === 0){
-       res.status(404).send("UserID does not exist in the user table.")
+       res.status(200).send({message:"UserID does not exist in the user table."})
     }else{
-        res.status(200).send("Your Data is updated successfully")
+        res.status(200).send({message: "Your Data is updated successfully"})
     }
 
     }catch(err){
@@ -102,7 +103,7 @@ const deleteUsers = async (req:Request, res:Response, next:NextFunction)=>{
       if(result.affectedRows === 0){
         res.status(404).send("userID does not exist in the user table.")
       }else{
-        res.status(200).send("Your data is successfully deleted")
+        res.status(200).send({message:"user data is successfully deleted"})
         }
     }
     catch(err){
