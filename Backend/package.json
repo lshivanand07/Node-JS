@@ -9,7 +9,8 @@
     "test": "jest",
     "prepare": "husky",
     "test:coverage": "jest --coverage",
-    "dev": "nodemon --exec ts-node src/server.ts"
+    "dev": "nodemon --exec ts-node src/server.ts",
+    "start": "node dist/src/server.js"
   },
   "keywords": [],
   "author": "",

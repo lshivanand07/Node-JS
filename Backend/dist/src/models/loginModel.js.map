@@ -1,0 +1,1 @@
+{"version":3,"file":"loginModel.js","sourceRoot":"","sources":["../../../src/models/loginModel.ts"],"names":[],"mappings":";;;AACA,4DAA6C;AAE7C,MAAM,sBAAsB,GAAG,KAAK,EAAE,KAAY,EAAC,EAAE;IAEpD,MAAM,CAAC,IAAI,CAAC,GAAG,MAAM,iBAAE,CAAC,KAAK,CAAkB,qCAAqC,EAAE,CAAC,KAAK,CAAC,CAAC,CAAA;IAC9F,OAAO,IAAI,CAAA;AACZ,CAAC,CAAA;AAEO,wDAAsB"}
