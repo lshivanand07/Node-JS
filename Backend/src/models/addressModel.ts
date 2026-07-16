@@ -69,6 +69,8 @@ const updateUserAddressByUserId = async (userID: number, userAddressStatus: stri
     const userAddressFields: Record<string, unknown> = {};
     const addressFields: Record<string, unknown> = {};
 
+    console.log('add data',userID, userAddressStatus, addressData)
+
     for (const key in addressData) {
       if (userAddressColumns.has(key)) {
         userAddressFields[key] = addressData[key];
@@ -107,7 +109,7 @@ const updateUserAddressByUserId = async (userID: number, userAddressStatus: stri
       AND user_address.user_address_status = ?
     `;
 
-    const [result] = await db.query<ResultSetHeader>(query, [ values, userID, userAddressStatus]);
+    const [result] = await db.query<ResultSetHeader>(query, [...values, userID, userAddressStatus]);
 
     return result;
 
