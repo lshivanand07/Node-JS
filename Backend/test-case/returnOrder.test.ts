@@ -1,0 +1,96 @@
+import request from "supertest";
+import {server} from '../src/app'
+
+describe("return order API", ()=>{
+
+   test( "GET returnOrder : /api/get-return-status/:orderID", async ()=>{
+        const res = await request(server).get('/api/get-return-status/4')
+         .set("Authorization", "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2VtYWlsIjoiYW5hbmRAZ21haWwuY29tIiwidXNlcl9pZCI6MTUyLCJ1c2VyX3JvbGUiOiJjdXN0b21lciIsImlhdCI6MTc3ODA0Mzk0MywiZXhwIjoxNzc4NjQ4NzQzfQ.KGWYNVotEZx9iJQHdQ2NJa52SkHL-wjDuMiWRu3lAgI");
+        expect(res.statusCode).toBe(200);
+   })
+
+   test( "GET returnOrder : /api/get-refund-status/:orderID", async ()=>{
+        const res = await request(server).get('/api/get-refund-status/3')
+         .set("Authorization", "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2VtYWlsIjoiYW5hbmRAZ21haWwuY29tIiwidXNlcl9pZCI6MTUyLCJ1c2VyX3JvbGUiOiJjdXN0b21lciIsImlhdCI6MTc3ODA0Mzk0MywiZXhwIjoxNzc4NjQ4NzQzfQ.KGWYNVotEZx9iJQHdQ2NJa52SkHL-wjDuMiWRu3lAgI");
+        expect(res.statusCode).toBe(200);
+   })
+
+    test( "GET returnOrder : /api/get-refund-status/:orderID", async ()=>{
+        const res = await request(server).get('/api/get-return-status/350')
+         .set("Authorization", "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2VtYWlsIjoiYW5hbmRAZ21haWwuY29tIiwidXNlcl9pZCI6MTUyLCJ1c2VyX3JvbGUiOiJjdXN0b21lciIsImlhdCI6MTc3ODA0Mzk0MywiZXhwIjoxNzc4NjQ4NzQzfQ.KGWYNVotEZx9iJQHdQ2NJa52SkHL-wjDuMiWRu3lAgI");
+        expect(res.statusCode).toBe(404);
+   })
+
+    test( "GET returnOrder : /api/get-refund-status/:orderID", async ()=>{
+        const res = await request(server).get('/api/get-refund-status/350')
+         .set("Authorization", "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2VtYWlsIjoiYW5hbmRAZ21haWwuY29tIiwidXNlcl9pZCI6MTUyLCJ1c2VyX3JvbGUiOiJjdXN0b21lciIsImlhdCI6MTc3ODA0Mzk0MywiZXhwIjoxNzc4NjQ4NzQzfQ.KGWYNVotEZx9iJQHdQ2NJa52SkHL-wjDuMiWRu3lAgI");
+        expect(res.statusCode).toBe(404);
+   })
+
+   test( "post returnOrder : /api/post-return-orders", async ()=>{
+       const returnData: {orderId:number, reason:string} = {
+        orderId:3,
+        reason:"damage"
+       }
+        const res = await request(server).post('/api/post-return-orders').send(returnData)
+         .set("Authorization", "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2VtYWlsIjoiYW5hbmRAZ21haWwuY29tIiwidXNlcl9pZCI6MTUyLCJ1c2VyX3JvbGUiOiJjdXN0b21lciIsImlhdCI6MTc3ODA0Mzk0MywiZXhwIjoxNzc4NjQ4NzQzfQ.KGWYNVotEZx9iJQHdQ2NJa52SkHL-wjDuMiWRu3lAgI");
+        expect(res.statusCode).toBe(201);
+   })
+
+   test( "post returnOrder : /api/post-return-orders", async ()=>{
+       const returnData: {orderId:number} = {
+        orderId:3
+       }
+        const res = await request(server).post('/api/post-return-orders').send(returnData)
+         .set("Authorization", "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2VtYWlsIjoiYW5hbmRAZ21haWwuY29tIiwidXNlcl9pZCI6MTUyLCJ1c2VyX3JvbGUiOiJjdXN0b21lciIsImlhdCI6MTc3ODA0Mzk0MywiZXhwIjoxNzc4NjQ4NzQzfQ.KGWYNVotEZx9iJQHdQ2NJa52SkHL-wjDuMiWRu3lAgI");
+        expect(res.statusCode).toBe(400);
+   })
+
+   test( "post returnOrder : /api/post-return-orders", async ()=>{
+       const returnData: {orderNumber:number, reason:string} = {
+        orderNumber:3,
+        reason:"damage"
+       }
+        const res = await request(server).post('/api/post-return-orders').send(returnData)
+         .set("Authorization", "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2VtYWlsIjoiYW5hbmRAZ21haWwuY29tIiwidXNlcl9pZCI6MTUyLCJ1c2VyX3JvbGUiOiJjdXN0b21lciIsImlhdCI6MTc3ODA0Mzk0MywiZXhwIjoxNzc4NjQ4NzQzfQ.KGWYNVotEZx9iJQHdQ2NJa52SkHL-wjDuMiWRu3lAgI");
+        expect(res.statusCode).toBe(500);
+   })
+
+   test( "put returnOrder : /api/edit-return-order-status/:orderID", async ()=>{
+       const returnData: {return_status:string} = {
+        return_status:"picked_up"
+       }
+        const res = await request(server).put('/api/edit-return-order-status/3').send(returnData)
+         .set("Authorization", "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2VtYWlsIjoiYW5hbmRAZ21haWwuY29tIiwidXNlcl9pZCI6MTUyLCJ1c2VyX3JvbGUiOiJjdXN0b21lciIsImlhdCI6MTc3ODA0Mzk0MywiZXhwIjoxNzc4NjQ4NzQzfQ.KGWYNVotEZx9iJQHdQ2NJa52SkHL-wjDuMiWRu3lAgI");
+        expect(res.statusCode).toBe(200);
+   })
+
+    test( "put returnOrder : /api/edit-return-order-status/:orderID", async ()=>{
+       const returnData: {return_status:string} = {
+        return_status:"picked_up"
+       }
+        const res = await request(server).put('/api/edit-return-order-status/17').send(returnData)
+         .set("Authorization", "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2VtYWlsIjoiYW5hbmRAZ21haWwuY29tIiwidXNlcl9pZCI6MTUyLCJ1c2VyX3JvbGUiOiJjdXN0b21lciIsImlhdCI6MTc3ODA0Mzk0MywiZXhwIjoxNzc4NjQ4NzQzfQ.KGWYNVotEZx9iJQHdQ2NJa52SkHL-wjDuMiWRu3lAgI");
+        expect(res.statusCode).toBe(404);
+   })
+
+    test( "put refund : /api/edit-refund-status/8", async ()=>{
+       const returnData: {refund_status:string} = {
+        refund_status:"success"
+       }
+        const res = await request(server).put('/api/edit-refund-status/8').send(returnData)
+         .set("Authorization", "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2VtYWlsIjoiYW5hbmRAZ21haWwuY29tIiwidXNlcl9pZCI6MTUyLCJ1c2VyX3JvbGUiOiJjdXN0b21lciIsImlhdCI6MTc3ODA0Mzk0MywiZXhwIjoxNzc4NjQ4NzQzfQ.KGWYNVotEZx9iJQHdQ2NJa52SkHL-wjDuMiWRu3lAgI");
+        expect(res.statusCode).toBe(200);
+   })
+
+    test( "put refund : /api/edit-refund-status/:orderId", async ()=>{
+       const returnData: {refund_status:string} = {
+        refund_status:"success"
+       }
+        const res = await request(server).put('/api/edit-refund-status/80').send(returnData)
+         .set("Authorization", "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2VtYWlsIjoiYW5hbmRAZ21haWwuY29tIiwidXNlcl9pZCI6MTUyLCJ1c2VyX3JvbGUiOiJjdXN0b21lciIsImlhdCI6MTc3ODA0Mzk0MywiZXhwIjoxNzc4NjQ4NzQzfQ.KGWYNVotEZx9iJQHdQ2NJa52SkHL-wjDuMiWRu3lAgI");
+        expect(res.statusCode).toBe(404);
+   })
+
+
+})
