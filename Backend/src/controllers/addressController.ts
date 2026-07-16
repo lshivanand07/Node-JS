@@ -61,9 +61,9 @@ const updateAddress = async (req:Request, res:Response, next:NextFunction)=>{
 
         const result = await updateUserAddressByUserId(userID, userAddressStatus, addressData)
         if(result.affectedRows === 0){
-             res.status(404).send("address Id Not Found")
+             res.status(200).send({message:"address Id Not Found"})
         }else{
-                 res.status(200).send("address Data Updated Successfully") 
+                 res.status(200).send({message:"address Data Updated Successfully"}) 
             } 
     }
     catch(err){
