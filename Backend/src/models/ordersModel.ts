@@ -9,11 +9,13 @@ const fetchAllOrders = async ()=>{
     on order_items.product_id = products.product_id
 	inner join users
     on orders.user_id = users.user_id`)
+
+   await db.query('UPDATE orders SET admin_viewed = TRUE WHERE admin_viewed = FALSE')
    return rows
 }
 
 const fetchOrdersByUserId = async (userID:number,)=>{
-    const query = `select *, address.*, DATE_FORMAT(dob, '%d %M %Y') AS order_date from orders
+    const query = `select *, address.*, DATE_FORMAT(order_date, '%d %M %Y') AS order_date from orders
     inner join order_items
     on orders.order_id = order_items.order_id
     inner join products

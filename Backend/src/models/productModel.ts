@@ -5,6 +5,8 @@ const fetchAllProducts =  async ()=>{
      const [rows] = await db.query(`SELECT * FROM products
 inner join product_images on products.product_id = product_images.product_id 
 inner join product_discounts on products.product_id = product_discounts.product_id`)
+
+await db.query('UPDATE products SET admin_viewed = TRUE WHERE admin_viewed = FALSE')
      return rows;
     }
 
