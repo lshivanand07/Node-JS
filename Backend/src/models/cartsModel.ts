@@ -5,18 +5,27 @@ import  { db }  from '../../config/dbConnection'
 // get user carts
 const fetchOneUserCartsByUserId = async (userID:number)=>{
 
-const query = (`select cart.user_id, cart.cart_id, quantity, product_name, description, product_variants.*,  product_images.image_url, product_discounts.discount_percentage from cart
-inner join cart_items
-on cart.cart_id = cart_items.cart_id
-left join products
-on cart_items.product_id = products.product_id
-inner join product_variants
-on cart_items.variant_id = product_variants.variant_id
-left join product_images
-on products.product_id = product_images.product_id
-left join product_discounts
-on products.product_id = product_discounts.product_id
-where cart.user_id = ?`)
+const query = (`SELECT
+    cart.user_id,
+    cart.cart_id,
+    quantity,
+    products.product_name,
+    products.description,
+    product_variants.*,
+    product_images.image_url,
+    product_discounts.discount_percentage
+FROM cart
+INNER JOIN cart_items
+    ON cart.cart_id = cart_items.cart_id
+INNER JOIN product_variants
+    ON cart_items.variant_id = product_variants.variant_id
+LEFT JOIN products
+    ON product_variants.product_id = products.product_id
+LEFT JOIN product_images
+    ON products.product_id = product_images.product_id
+LEFT JOIN product_discounts
+    ON products.product_id = product_discounts.product_id
+WHERE cart.user_id = ?`)
 const [rows] = await db.query(query, [userID])
 return rows;
 }

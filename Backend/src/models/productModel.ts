@@ -9,7 +9,12 @@ inner join product_discounts on products.product_id = product_discounts.product_
     }
 
 const fetchOneProductsByProductId = async (productID:number)=>{
-    const [rows] = await db.query("select * from products where product_id = ?",[productID])
+    const [rows] = await db.query(`select * from products
+inner join product_images
+on products.product_id = product_images.product_id
+inner join  product_variants 
+on products.product_id = product_variants.product_id 
+where product_variants.product_id = ?`,[productID])
     return rows;
     }
 

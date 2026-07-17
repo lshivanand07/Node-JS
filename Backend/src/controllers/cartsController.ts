@@ -16,6 +16,7 @@ const getUserCartByUserID = async(req:Request, res:Response, next:NextFunction)=
       if(data[0].length === 0){
         res.status(200).send({message:'Your Cart is Empty'})
       }else{
+        console.log(data)
         res.status(200).send(data)
       }
 
@@ -68,9 +69,9 @@ const deleteUserCart = async (req:Request, res:Response, next:NextFunction)=>{
     const variantID  = Number(req.params.variantID)
   const result =await deleteUserCartByUserId(userID, productID, variantID)
      if(result.affectedRows === 0){
-        res.status(404).send("userID id is Not Found")
+        res.status(200).send({message:"userID id is Not Found"})
       }else{
-        res.status(200).send("user cart delete Successfully")
+        res.status(200).send({message:"user cart delete Successfully"})
       }
   }
   catch(err){

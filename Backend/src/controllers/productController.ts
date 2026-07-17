@@ -16,7 +16,22 @@ const getProducts = async (req:Request, res:Response, next:NextFunction)=>{
             if(data[0].length === 0){
                   res.status(404).send("productID is not found")
             }else{
-                  res.status(200).send(data)
+            console.log("data", data)
+                  const product = {
+        product_id: data[0][0].product_id,
+        product_name: data[0][0].product_name,
+        description: data[0][0].description,
+        image_url: data[0][0].image_url,
+        variants: data[0].map((item:any) => ({
+            variant_id: item.variant_id,
+            size: item.size,
+            color: item.color,
+            price: item.price,
+            stock: item.stock,
+        })),
+    };
+    console.log("product", product)
+                  res.status(200).send(product)
             }
             }else{
             const rows =  await fetchAllProducts()
