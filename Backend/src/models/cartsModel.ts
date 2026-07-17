@@ -31,6 +31,7 @@ return rows;
 }
 
 const createUserCart = async(userID:number, cartData:any)=>{
+  console.log("cartData",cartData)
   let cart_id;
     const [cart] = await db.query('SELECT * FROM cart WHERE user_id = ?',[userID]);
 

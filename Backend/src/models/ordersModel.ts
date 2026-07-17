@@ -2,12 +2,18 @@ import { ResultSetHeader } from 'mysql2';
 import {db} from '../../config/dbConnection';
 
 const fetchAllOrders = async ()=>{
-   const [rows] = await db.query('select * from orders')
+   const [rows] = await db.query(`select *, users.*, products.*, DATE_FORMAT(dob, '%d %M %Y') AS order_date from orders
+    inner join order_items
+    on orders.order_id = order_items.order_id
+    inner join products
+    on order_items.product_id = products.product_id
+	inner join users
+    on orders.user_id = users.user_id`)
    return rows
 }
 
 const fetchOrdersByUserId = async (userID:number,)=>{
-    const query = `select *, address.* from orders
+    const query = `select *, address.*, DATE_FORMAT(dob, '%d %M %Y') AS order_date from orders
     inner join order_items
     on orders.order_id = order_items.order_id
     inner join products
