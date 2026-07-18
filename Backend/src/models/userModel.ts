@@ -13,7 +13,7 @@ const getOneUserByUserId =  async (userID:number)=>{
 }
 
 const getUserInfo =  async (userID:number)=>{
-  const [ rows ] = await db.query("select * from users where user_id = ?", [userID])
+  const [ rows ] = await db.query("select *, DATE_FORMAT(dob, '%d %M %Y') AS dob from users where user_id = ?", [userID])
   return rows;
 }
 

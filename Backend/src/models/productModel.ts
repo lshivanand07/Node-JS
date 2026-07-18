@@ -4,7 +4,7 @@ import {db} from '../../config/dbConnection';
 const fetchAllProducts =  async ()=>{
      const [rows] = await db.query(`SELECT * FROM products
 inner join product_images on products.product_id = product_images.product_id 
-inner join product_discounts on products.product_id = product_discounts.product_id`)
+inner join product_discounts on products.product_id = product_discounts.product_id ORDER BY admin_viewed ASC`)
 
 await db.query('UPDATE products SET admin_viewed = TRUE WHERE admin_viewed = FALSE')
      return rows;
@@ -55,12 +55,12 @@ const fetchProductVariantsByprodutId = async (productID:number)=>{
     }
 
 //eslint-disable-next-line @typescript-eslint/no-explicit-any
-const insertProductData = async (productData:any)=>{
-
+const insertProductData = async (seller_id:number, productData:any)=>{
+console.log('seller_id', seller_id)
     const productTableFields={
         product_name: productData.product_name,
         description: productData.description,
-        seller_id: productData.seller_id
+        User_id: seller_id
     }
 
     const productTableKeys = Object.keys(productTableFields).join(",")

@@ -141,8 +141,9 @@ const getProductVariants = async (req:Request, res:Response, next:NextFunction)=
 
 const createProducts = async (req:Request, res:Response, next:NextFunction)=>{
       try{
+            const seller_id = (req as any).user.user_id
              const productData = req.body;
-            const result = await insertProductData(productData)
+            const result = await insertProductData(seller_id, productData)
             res.status(201).send({message: "Product data has been successfully uploaded.",
                                   data:result
                                 })
@@ -179,9 +180,9 @@ const deleteProduct = async(req:Request, res:Response, next:NextFunction)=>{
        const productID = Number(req.params.productID)
        const result = await deleteProductByProductId(productID)
        if(result.affectedRows === 0){
-            res.status(404).send("productID is Not Found")
+            res.status(200).send({message:"productID is Not Found"})
        }else{
-            res.status(200).send("product data delete successfull")
+            res.status(200).send({message:"product data delete successfull"})
        }
    }
    catch(err){
