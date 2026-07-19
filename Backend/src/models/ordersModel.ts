@@ -8,7 +8,7 @@ const fetchAllOrders = async ()=>{
     inner join products
     on order_items.product_id = products.product_id
 	inner join users
-    on orders.user_id = users.user_id ORDER BY admin_viewed ASC`)
+    on orders.user_id = users.user_id ORDER BY orders.admin_viewed ASC`)
 
    await db.query('UPDATE orders SET admin_viewed = TRUE WHERE admin_viewed = FALSE')
    return rows

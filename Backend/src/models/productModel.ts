@@ -4,7 +4,7 @@ import {db} from '../../config/dbConnection';
 const fetchAllProducts =  async ()=>{
      const [rows] = await db.query(`SELECT * FROM products
 inner join product_images on products.product_id = product_images.product_id 
-inner join product_discounts on products.product_id = product_discounts.product_id ORDER BY admin_viewed ASC`)
+inner join product_discounts on products.product_id = product_discounts.product_id ORDER BY products.admin_viewed ASC`)
 
 await db.query('UPDATE products SET admin_viewed = TRUE WHERE admin_viewed = FALSE')
      return rows;
