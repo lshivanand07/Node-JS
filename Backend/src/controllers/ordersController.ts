@@ -13,7 +13,7 @@ const getOrders = async (req:Request, res:Response, next:NextFunction)=>{
         const data:any[] = []
             data.push(rows)
             if(data[0].length === 0){
-                res.status(200).send(message)
+                res.status(200).send({message:message})
             }else{
                 res.status(200).send(data)
             }
@@ -63,13 +63,14 @@ const updateOrders = async (req:Request, res:Response, next:NextFunction)=>{
     try{
       const userID = Number(req.params.userID);
       const orderId = Number(req.params.orderId)
+      console.log('dnd', userID , orderId)
       const ordersData = req.body
 
       const result = await updateOrdersByUserId(userID, orderId, ordersData)
       if(result.affectedRows === 0){
-        res.status(404).send("user id not found")
+        res.status(200).send({message:"user id not found"})
       }else{
-        res.status(200).send("order and payment status updated successfully")
+        res.status(200).send({message:"order and payment status updated successfully"})
       }
 
     }

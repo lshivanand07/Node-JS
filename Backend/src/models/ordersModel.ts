@@ -53,7 +53,7 @@ const individualProductOrder = async (productID:number)=>{
   return rows
 }
 
-const updateOrdersByUserId = async (userID:number, orderId:number,  ordersData:Record<string, unknown>)=>{
+const updateOrdersByUserId = async (userID:number, orderId:number, ordersData:Record<string, unknown>)=>{
     
         const order_status = ordersData.order_status;
         const payment_status = ordersData.payment_status;
